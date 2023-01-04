@@ -1,0 +1,147 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > TicTacToeTest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">tictactoe</a>
+</div>
+
+<h1>Coverage Summary for Class: TicTacToeTest (tictactoe)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TicTacToeTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package tictactoe;
+&nbsp;
+&nbsp;import org.junit.Assert;
+&nbsp;import org.junit.Before;
+&nbsp;import org.junit.Test;
+&nbsp;
+<b class="nc">&nbsp;public class TicTacToeTest {</b>
+<b class="nc">&nbsp;    public TicTacToeMain igrica = new TicTacToeMain();</b>
+&nbsp;    @Before
+&nbsp;    public void ZapocniIgru () {
+<b class="nc">&nbsp;        igrica.play();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void Poraz () {
+<b class="nc">&nbsp;        igrica.buttons [0][0].doClick();</b>
+<b class="nc">&nbsp;        igrica.buttons [0][1].doClick();</b>
+<b class="nc">&nbsp;        igrica.buttons [2][1].doClick();</b>
+<b class="nc">&nbsp;        Assert.assertEquals(&quot;Sorry, You Lose!&quot;, igrica.getStatus());</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void Nereseno() {
+<b class="nc">&nbsp;        igrica.buttons[1][1].doClick();</b>
+<b class="nc">&nbsp;        igrica.buttons[2][0].doClick();</b>
+<b class="nc">&nbsp;        igrica.buttons[0][1].doClick();</b>
+<b class="nc">&nbsp;        igrica.buttons[1][2].doClick();</b>
+<b class="nc">&nbsp;        igrica.buttons[2][2].doClick();</b>
+<b class="nc">&nbsp;        Assert.assertEquals(&quot;Draw, Click &#39;Play&#39; For Rematch!&quot;, igrica.getStatus());</b>
+&nbsp;
+&nbsp;    }
+&nbsp;    @Test
+&nbsp;    public void Pobeda () {
+<b class="nc">&nbsp;        igrica.buttons [1][1].doClick();</b>
+<b class="nc">&nbsp;        igrica.buttons [2][2].doClick();</b>
+<b class="nc">&nbsp;        igrica.buttons [0][2].doClick();</b>
+<b class="nc">&nbsp;        igrica.buttons [1][2].doClick();</b>
+<b class="nc">&nbsp;        Assert.assertEquals(&quot;Congratulations, You&#39;ve Won!&quot;, igrica.getStatus());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-12 00:47</div>
+</div>
+</body>
+</html>

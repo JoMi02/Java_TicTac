@@ -1,0 +1,204 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > TicTacToeAI</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">tictactoe</a>
+</div>
+
+<h1>Coverage Summary for Class: TicTacToeAI (tictactoe)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TicTacToeAI</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package tictactoe;
+&nbsp;
+&nbsp;public class TicTacToeAI {
+&nbsp;
+&nbsp; /* the board */
+&nbsp; private int board[][];
+&nbsp; /* empty */
+&nbsp; public static final int EMPTY = 0;
+&nbsp; /* player one */
+&nbsp; public static final int ONE = 1;
+&nbsp; /* player two */
+&nbsp;    public static final int TWO = 2;
+&nbsp;
+<b class="nc">&nbsp; public TicTacToeAI() {</b>
+<b class="nc">&nbsp;  board = new int[3][3];</b>
+&nbsp; }
+&nbsp;
+&nbsp; /* get the board value for position (i,j) */
+&nbsp; public int getBoardValue(int i,int j) {
+<b class="nc">&nbsp;  if(i &lt; 0 || i &gt;= 3) return EMPTY;</b>
+<b class="nc">&nbsp;  if(j &lt; 0 || j &gt;= 3) return EMPTY;</b>
+<b class="nc">&nbsp;  return board[i][j];</b>
+&nbsp;    }
+&nbsp;
+&nbsp; /* set the board value for position (i,j) */
+&nbsp; public void setBoardValue(int i,int j,int token) {
+<b class="nc">&nbsp;  if(i &lt; 0 || i &gt;= 3) return;</b>
+<b class="nc">&nbsp;  if(j &lt; 0 || j &gt;= 3) return;</b>
+<b class="nc">&nbsp;  board[i][j] = token;</b>
+&nbsp;    }
+&nbsp;
+&nbsp; /* calculate the winning move for current token */
+&nbsp; public int []nextWinningMove(int token) {
+&nbsp;
+<b class="nc">&nbsp;  for(int i=0;i&lt;3;i++)</b>
+<b class="nc">&nbsp;   for(int j=0;j&lt;3;j++)</b>
+<b class="nc">&nbsp;    if(getBoardValue(i, j)==EMPTY) {</b>
+<b class="nc">&nbsp;     board[i][j] = token;</b>
+<b class="nc">&nbsp;     boolean win = isWin(token);</b>
+<b class="nc">&nbsp;     board[i][j] = EMPTY;</b>
+<b class="nc">&nbsp;     if(win) return new int[]{i,j};</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;  return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int inverse(int token) {
+<b class="nc">&nbsp;  return token==ONE ? TWO : ONE;</b>
+&nbsp; }
+&nbsp;
+&nbsp;    /* calculate the best move for current token */
+&nbsp;    public int []nextMove(int token) {
+&nbsp;
+&nbsp;        /* lucky position in the center of board*/
+<b class="nc">&nbsp;        if(getBoardValue(1, 1)==EMPTY) return new int[]{1,1};</b>
+&nbsp;
+&nbsp;        /* if we can move on the next turn */
+<b class="nc">&nbsp;        int winMove[] = nextWinningMove(token);</b>
+<b class="nc">&nbsp;        if(winMove!=null) return winMove;</b>
+&nbsp;
+&nbsp;        /* choose the move that prevent enemy to win */
+<b class="nc">&nbsp;        for(int i=0;i&lt;3;i++)</b>
+<b class="nc">&nbsp;            for(int j=0;j&lt;3;j++)</b>
+<b class="nc">&nbsp;                if(getBoardValue(i, j)==EMPTY)</b>
+&nbsp;                {
+<b class="nc">&nbsp;                    board[i][j] = token;</b>
+<b class="nc">&nbsp;              boolean ok = nextWinningMove(inverse(token)) == null;</b>
+<b class="nc">&nbsp;                    board[i][j] = EMPTY;</b>
+<b class="nc">&nbsp;                    if(ok) return new int[]{i,j};</b>
+&nbsp;                }
+&nbsp;
+&nbsp;        /* choose available move */
+<b class="nc">&nbsp;        for(int i=0;i&lt;3;i++)</b>
+<b class="nc">&nbsp;            for(int j=0;j&lt;3;j++)</b>
+<b class="nc">&nbsp;                if(getBoardValue(i, j)==EMPTY)</b>
+<b class="nc">&nbsp;                    return new int[]{i,j};</b>
+&nbsp;
+&nbsp;        /* no move is available */
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp; /* determine if current token is win or not win */
+&nbsp; public boolean isWin(int token) {
+<b class="nc">&nbsp;  final int DI[]={-1,0,1,1};</b>
+<b class="nc">&nbsp;  final int DJ[]={1,1,1,0};</b>
+<b class="nc">&nbsp;  for(int i=0;i&lt;3;i++)</b>
+<b class="nc">&nbsp;   for(int j=0;j&lt;3;j++) {</b>
+&nbsp;
+&nbsp;    /* we skip if the token in position(i,j) not equal current token */
+<b class="nc">&nbsp;    if(getBoardValue(i, j)!=token) continue;</b>
+&nbsp;
+<b class="nc">&nbsp;    for(int k=0;k&lt;4;k++) {</b>
+<b class="nc">&nbsp;     int ctr = 0;</b>
+<b class="nc">&nbsp;                 while(getBoardValue(i+DI[k]*ctr, j+DJ[k]*ctr)==token) ctr++;</b>
+&nbsp;
+<b class="nc">&nbsp;     if(ctr==3) return true;</b>
+&nbsp;    }
+&nbsp;  }
+<b class="nc">&nbsp;  return false;</b>
+&nbsp;    }
+&nbsp;} 
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-12 00:47</div>
+</div>
+</body>
+</html>
